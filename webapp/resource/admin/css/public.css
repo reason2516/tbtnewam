@@ -1,0 +1,156 @@
+* {
+    padding:0px;
+    margin: 0px;
+    font-size:14px;
+}
+ul,ol {
+    list-style:none;
+}
+a {
+    text-decoration: none;
+    color:#3361AD;
+}
+iframe {
+    width:100%;
+    height:100%;
+    border:none;
+}
+table {
+    width:100%;
+}
+table,th,td {
+    border-collapse: collapse;
+    background:#fff;
+}
+th {
+    text-align: center;
+}
+th,td {
+    padding:8px 8px;
+}
+input,button {
+    border:solid 1px #dcdcdc;
+    height:30px;
+    padding:3px 6px;
+    color:#999;
+    background:#fff;
+    vertical-align: middle;
+}
+select {
+    border:solid 1px #ccc;
+}
+img {
+    border:none;
+    vertical-align: middle;
+}
+.len100 {
+    width:100px;
+}
+.len150 {
+    width:159px;
+}
+.len200 {
+    width:200px;
+}
+.len250 {
+    width:250px;
+}
+.len300 {
+    width:300px;
+}
+.len350 {
+    width:350px;
+}
+.len400 {
+    width:400px;
+}
+.l {
+    float:left;
+}
+.r {
+    float:right;
+}
+.c {
+    clear: both;
+}
+em {
+    color:#f00;
+    font-style:normal;
+    line-height:1.8em;
+    border-collapse:collapse;
+}
+
+.submit {
+    background:#255E9C;
+    height:30px;
+    padding:0px 30px;
+    line-height:1.8em;
+    color:#fff;
+    font-size:16px;
+    cursor: pointer;
+}
+.submit:hover {
+    background:#235194;
+}
+/**红星**/
+.errorMessage {
+    color:#f00;
+}
+span.msg {
+    color:#666;
+    border:solid 1px #eee;
+    padding:6px;
+    margin-left:10px;
+}
+.content {
+    padding:10px;
+}
+/*****分页处理*******/
+/*重写yii css 取消首页尾页的隐藏*/
+ul.yiiPager{
+    margin-top:20px;
+    display: block;
+    text-align: center;
+    
+}
+ul.yiiPager .first, ul.yiiPager .last{
+    display: inline-block;
+}
+/****表格样式1********/
+.table {
+    width:100%;
+}
+.table,.table td {
+    border:solid 1px #ccc;
+}
+.table th {
+    border:solid 1px #ccc;
+    width:100px;
+}
+.table thead tr td {
+    background: #eee;
+    color:#333;
+}
+/******按钮*******/
+.bt1 {
+    padding:8px 15px;
+    margin-right:6px;
+    background: #ccc;
+    color:#000;
+    border-radius: 3px;
+    text-align: center;
+    float:left;
+    display: block;
+    cursor: pointer;
+}
+.bt2 {
+    padding:8px 15px;
+    margin-right:6px;
+    background: #4884D5;
+    color:#fff;
+    border-radius: 3px;
+    text-align: center;
+    float:left;
+    display: block;
+    cursor: pointer;
+}

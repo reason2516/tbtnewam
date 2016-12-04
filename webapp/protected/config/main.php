@@ -6,31 +6,37 @@
 // CWebApplication properties can be configured here.
 return array(
     'basePath' => dirname(__FILE__) . DIRECTORY_SEPARATOR . '..',
-    'name' => 'My Web Application',
+    'name' => '通宝图年会系统',
+    'language' => 'zh_cn',
     // preloading 'log' component
     'preload' => array('log'),
     // autoloading model and component classes
     'import' => array(
         'application.models.*',
         'application.components.*',
+        'application.extensions.*',
+        'application.widgets.*',
+        'application.definds.*',
     ),
     'modules' => array(
         'admin',
-        
-        
-    // uncomment the following to enable the Gii tool
-      'gii'=>array(
-      'class'=>'system.gii.GiiModule',
-      'password'=>'123456',
-      // If removed, Gii defaults to localhost only. Edit carefully to taste.
-      'ipFilters'=>array('127.0.0.1','::1'),
-      ),
-     
+
+
+        // uncomment the following to enable the Gii tool
+        'gii' => array(
+            'class' => 'system.gii.GiiModule',
+            'password' => '123456',
+            // If removed, Gii defaults to localhost only. Edit carefully to taste.
+            'ipFilters' => array('127.0.0.1', '::1'),
+        ),
+
     ),
     // application components
     'components' => array(
         'user' => array(
             // enable cookie-based authentication
+            'class'=>'WebUser',//这个WebUser是继承CwebUser，稍后给出它的代码  
+            'stateKeyPrefix'=>'user',//这个是设置前台session的前缀  
             'allowAutoLogin' => true,
         ),
         // uncomment the following to enable URLs in path-format
@@ -53,15 +59,16 @@ return array(
             'class' => 'CLogRouter',
             'routes' => array(
                 array(
-                    'class' => 'CFileLogRoute',
+                    'class' => 'ext.yii-debug-toolbar.YiiDebugToolbarRoute',
+//                    'class' => 'CFileLogRoute',
                     'levels' => 'error, warning',
                 ),
-            // uncomment the following to show log messages on web pages
-            /*
-              array(
-              'class'=>'CWebLogRoute',
-              ),
-             */
+                // uncomment the following to show log messages on web pages
+                /*
+                  array(
+                  'class'=>'CWebLogRoute',
+                  ),
+                 */
             ),
         ),
     ),
