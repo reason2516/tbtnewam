@@ -32,36 +32,18 @@
     <?php $this->widget('application.widgets.PagerWidget', array('pages' => $pager)); ?>
 </div>
 <script>
-    function dialogBtn(obj) {
-        $(obj.element).click(function () {
-            if (confirm(obj.title)) {
-                $.ajax({
-                    'dataType': 'json',
-                    'url': obj.url,
-                    'data': obj.data,
-                    success: function (jsonData) {
-                        alert(jsonData.message);
-                        if(jsonData.status == 10000){
-                            if(obj.callBackUrl === undefined || obj.callBackUrl ===''){
-                                return TRUE;
-                            }else {
-                                window.location.href = obj.callBackUrl;
-                            }
-                        }
-                    }
-                });
-            }
-        });
-    }
     $(function () {
-        dialogBtn(
-                {
-                    'element': '.delBtn',
-                    'title': '你是否确定要执行此操作?',
-                    'url': '<?php echo Yii::app()->createUrl('admin/member/delete') ?>',
-                    'callBackUrl': '<?php echo Yii::app()->request->getUrl() ?>',
-                    'data': {'id': $('.delBtn').attr('delId')},
+        $(".delBtn").click(function () {
+            $(this).myDialog({
+                title: '成员删除',
+                content: '是否确认删除',
+                callBack: {
+                    functionName: 'myDialogCallBack',
+                    data: {id: $(this).attr('delId')},
+                    url: '/admin/member/delete',
+                    backUrl: '<?php Yii::app()->request->getUrl() ?>',
                 }
-        );
+            });
+        });
     });
 </script>

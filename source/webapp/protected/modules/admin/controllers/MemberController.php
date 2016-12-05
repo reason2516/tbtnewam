@@ -38,7 +38,7 @@ class MemberController extends AdminBaseController {
      */
     public function actionIndex() {
         $model = new Member();
-        $model->status = array(Member::STATUS_NORMAL, Member::STATUS_PAUSAL);
+        $model->status = array(Member::STATUS_NORMAL, Member::STATUS_PAUSAL, Member::STATUS_DELETE);
         $model->pageSize = 10;
         $dataProvider = $model->search();
         $list = $dataProvider->getData();
@@ -64,7 +64,7 @@ class MemberController extends AdminBaseController {
      * 成员 - 更新
      */
     public function actionUpdate() {
-        $id = Yii::app()->request->getParam('id','');
+        $id = Yii::app()->request->getParam('id', '');
         $model = Member::model()->findByPk($id);
         if (Yii::app()->request->isPostRequest) {
             $model->attributes = Yii::app()->request->getParam('Member', '');
@@ -80,7 +80,7 @@ class MemberController extends AdminBaseController {
      */
     public function actionDelete() {
         $id = Yii::app()->request->getParam('id', '');
-        My::emptyParamsCheck($id,TRUE);
+        My::emptyParamsCheck($id, TRUE);
         $model = Member::model()->findByPk($id)->updateByPk($id, array('status' => Member::STATUS_DELETE));
         My::outPut($model);
     }
