@@ -66,6 +66,11 @@ class AdminModule extends CWebModule {
                         'url' => $this->createModuleUrl('member/index'),
                         'subItems' => array(),
                     ),
+                    'trash' => array(
+                        'name' => '回收站',
+                        'url' => $this->createModuleUrl('member/trash'),
+                        'subItems' => array(),
+                    ),
                 ),
             ),
             'lottery' => array(

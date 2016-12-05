@@ -75,7 +75,7 @@ class Member extends CActiveRecord {
     public function statusList() {
         return array(
             self::STATUS_NORMAL => '正常',
-            self::STATUS_PAUSAL => '暂停',
+            self::STATUS_PAUSAL => '暂停使用',
             self::STATUS_DELETE => '删除',
         );
     }
@@ -104,14 +104,13 @@ class Member extends CActiveRecord {
      */
     public function search() {
         // @todo Please modify the following code to remove attributes that should not be searched.
-        $status = is_array($this->status) ? $this->status : explode(',', $this->status);
         
         $criteria = new CDbCriteria;
         $criteria->compare('id', $this->id);
         $criteria->compare('realname', $this->realname);
         $criteria->compare('job_number', $this->job_number);
         $criteria->compare('phonenumber', $this->phonenumber);
-        $criteria->addInCondition('status', $status);
+        $criteria->compare('status', $this->status);
 
         return new CActiveDataProvider($this, array(
             'criteria' => $criteria,

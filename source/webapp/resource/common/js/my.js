@@ -6,17 +6,18 @@ $.fn.myDialog = function (params) {
         title: params.title != null ? params.title : '审核',
         content: params.content != null ? '<div id="myDialogContent"><p>' + params.content + '</p></div>' : '<div id="myDialogContent"><p>是否确认通过?</p></div>',
         callBack: params.callBack != null ? params.callBack : null,
+        close: function (event, ui) { // 重写close方法,移除append到body中的Dom元素
+            $(this).dialog("destroy");
+            $(this).remove();
+        },
         buttons: [
             {
                 html: params.yesButton != null ? params.yesButton : '通过',
                 class: '',
                 click: function () {
                     $(this).dialog('close');
-                    removeDialog();
-                    if (default_params.callBack!= null || default_params.callBack.functionName != '') {
-                        myDialogCallBack(default_params.callBack); // 默认回调
-                    } else {
-//                        default_params.callBack.functionName.apply(this, default_params.callBack);
+                    if (default_params.callBack != null || default_params.callBack.functionName != '') {
+                        eval(default_params.callBack.functionName)(default_params.callBack); // 生成回调方法,传入回调参数
                     }
                 }
             },
@@ -25,7 +26,6 @@ $.fn.myDialog = function (params) {
                 class: '',
                 click: function () {
                     $(this).dialog('close');
-                    removeDialog()
                 }
             },
         ],
@@ -33,9 +33,7 @@ $.fn.myDialog = function (params) {
     $('body').append(default_params.content);
     $('#myDialogContent').dialog(default_params);
 }
-function removeDialog() {
-    $('#myDialogContent').remove();
-}
+
 /**
  * 回调方法
  * @param {type} params

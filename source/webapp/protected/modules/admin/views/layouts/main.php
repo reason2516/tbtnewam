@@ -3,11 +3,11 @@
     <head>
         <title><?php echo $this->pageTitle . '-' . Yii::app()->name; ?></title>
         <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
-        <link rel="stylesheet" href="/resource/common/jqueryUI/jquery-ui.min.css"/>
+        <link rel="stylesheet" href="/resource/common/plugs/jqueryUI/jquery-ui.min.css"/>
         <link rel="stylesheet" href="/resource/admin/css/public.css"/>
         <link rel="stylesheet" href="/resource/admin/css/index.css"/>
         <script type="text/javascript" src="/resource/admin/js/index.js"></script>
-        <script type="text/javascript" src="/resource/common/jqueryUI/jquery-ui.min.js"></script>
+        <script type="text/javascript" src="/resource/common/plugs/jqueryUI/jquery-ui.min.js"></script>
         <script type="text/javascript" src="/resource/common/js/my.js"></script>
         <?php Yii::app()->clientScript->registerCoreScript('jquery');?>
     </head>

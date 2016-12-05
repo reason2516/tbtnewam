@@ -1,4 +1,4 @@
-<?php $this->pageTitle = '成员首页' ?>
+<?php $this->pageTitle = '回收站-成员管理' ?>
 <table class="table">
     <tr>
         <?php
@@ -22,25 +22,23 @@
             <td><?php echo $item->phonenumber ?></td>
             <td><?php echo $model->getStatusName($item->status) ?></td>
             <td>
-                <?php echo Chtml::link('编辑', Yii::app()->createUrl('admin/member/update', array('id' => $item->id))) ?>
-                <?php echo Chtml::link('删除', 'javascript:;', array('class' => 'delBtn', 'delId' => $item->id)) ?>
+                <?php // echo Chtml::link('编辑', Yii::app()->createUrl('admin/member/update', array('id' => $item->id))) ?>
+                <?php echo Chtml::link('还原', 'javascript:;', array('class' => 'delBtn', 'delId' => $item->id)) ?>
             </td>
         </tr>
     <?php endforeach; ?>
-</table>
+</table>  
 <div><?php echo empty($list) ? '暂无记录' : '' ?></div>
-<?php $this->widget('application.widgets.PagerWidget', array('pages' => $pager)); ?>
 <script>
     $(function () {
         $(".delBtn").click(function () {
             $(this).myDialog({
-                title: '成员删除',
-                content: '是否确认删除',
+                title: '还原',
+                content: '是否确认还原',
                 callBack: {
                     functionName: 'myDialogCallBack',
-                    data: {id: $(this).attr('delId'), status:<?php echo Member::STATUS_DELETE ?>},
-                    url: '/admin/member/delete',
-//                    backUrl: '<?php Yii::app()->request->getUrl() ?>', 
+                    data: {id: $(this).attr('delId'), status:<?php echo Member::STATUS_NORMAL ?>},
+                    url: '/admin/member/updateStatus',
                 }
             });
         });

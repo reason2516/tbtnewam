@@ -32,7 +32,7 @@ return array(
     'components' => array(
         'user' => array(
             // enable cookie-based authentication
-            'class' => 'WebUser', //这个WebUser是继承CwebUser，稍后给出它的代码  
+            'class' => 'WebUser', //这个WebUser是继承CwebUser  
             'stateKeyPrefix' => 'user', //这个是设置前台session的前缀  
             'allowAutoLogin' => true,
         ),
@@ -65,7 +65,6 @@ return array(
             'class' => 'CLogRouter',
             'routes' => array(
                 array(
-//                    'class' => 'ext.yii-debug-toolbar.YiiDebugToolbarRoute',
                     'class' => 'CFileLogRoute',
                     'levels' => 'error, warning',
                 ),

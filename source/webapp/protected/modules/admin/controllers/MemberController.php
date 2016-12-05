@@ -23,7 +23,7 @@ class MemberController extends AdminBaseController {
         return array(
             array(
                 'allow',
-                'actions' => array('index', 'add', 'update', 'delete'),
+                'actions' => array('index', 'add', 'update', 'UpdateStatus', 'trash'),
                 'users' => array('@'),
             ),
             array(
@@ -38,7 +38,7 @@ class MemberController extends AdminBaseController {
      */
     public function actionIndex() {
         $model = new Member();
-        $model->status = array(Member::STATUS_NORMAL, Member::STATUS_PAUSAL, Member::STATUS_DELETE);
+        $model->status = array(Member::STATUS_NORMAL, Member::STATUS_PAUSAL);
         $model->pageSize = 10;
         $dataProvider = $model->search();
         $list = $dataProvider->getData();
@@ -78,11 +78,25 @@ class MemberController extends AdminBaseController {
     /**
      * 成员 - 删除
      */
-    public function actionDelete() {
+    public function actionUpdateStatus() {
         $id = Yii::app()->request->getParam('id', '');
+        $status = Yii::app()->request->getParam('status', '');
         My::emptyParamsCheck($id, TRUE);
-        $model = Member::model()->findByPk($id)->updateByPk($id, array('status' => Member::STATUS_DELETE));
+        $model = Member::model()->findByPk($id)->updateByPk($id, array('status' => $status));
         My::outPut($model);
+    }
+
+    /**
+     * 成员信息回收站
+     */
+    public function actionTrash() {
+        $model = new Member();
+        $model->status =  Member::STATUS_DELETE;
+        $model->pageSize = 10;
+        $dataProvider = $model->search();
+        $list = $dataProvider->getData();
+        $pager = $dataProvider->pagination;
+        $this->render('trash', array('model' => $model, 'pager' => $pager, 'list' => $list));
     }
 
 }
