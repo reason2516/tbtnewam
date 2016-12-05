@@ -3,3 +3,4 @@
 /.idea
 runtime/
 assets/
+/source/webapp/protected/config/main.php
