@@ -39,7 +39,7 @@
                 callBack: {
                     functionName: 'myDialogCallBack',
                     data: {id: $(this).attr('delId'), status:<?php echo Member::STATUS_DELETE ?>},
-                    url: '/admin/member/delete',
+                    url: '/admin/member/updateStatus',
 //                    backUrl: '<?php Yii::app()->request->getUrl() ?>', 
                 }
             });

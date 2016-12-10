@@ -1,6 +1,6 @@
 *_local.php
 /nbproject
 /.idea
-runtime/
-assets/
+/source/webapp/assets/
+/source/webapp/protected/runtime/
 /source/webapp/protected/config/main.php
