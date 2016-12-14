@@ -19,17 +19,17 @@ $form = $this->beginWidget('CActiveForm', array(
         </td>
     </tr>
     <tr>
-        <td align="right"><?php echo $form->labelEx($model, 'time_start') ?></td>
+        <td align="right"><?php echo $form->labelEx($model, 'total') ?></td>
         <td>
-            <?php echo $form->textField($model, 'time_start', array('maxlength' => '20', 'readonly' => true, 'class' => 'len250', 'placeholder' => '请选择' . $model->getAttributeLabel('time_start'))) ?>
-            <?php echo $form->error($model, 'time_start'); ?>
+            <?php echo $form->textField($model, 'total', array('maxlength' => '4', 'class' => 'len250', 'placeholder' => '请选择' . $model->getAttributeLabel('total'))) ?>
+            <?php echo $form->error($model, 'total'); ?>
         </td>
     </tr>
     <tr>
-        <td align="right"><?php echo $form->labelEx($model, 'time_end') ?></td>
+        <td align="right"><?php echo $form->labelEx($model, 'sort') ?></td>
         <td>
-            <?php echo $form->textField($model, 'time_end', array('maxlength' => '20', 'readonly' => true, 'class' => 'len250', 'placeholder' => '请选择' . $model->getAttributeLabel('time_end'))) ?>
-            <?php echo $form->error($model, 'time_end'); ?>
+            <?php echo $form->textField($model, 'sort', array('maxlength' => '4', 'class' => 'len250', 'placeholder' => '请选择' . $model->getAttributeLabel('sort'))) ?>
+            <?php echo $form->error($model, 'sort'); ?>
         </td>
     </tr>
     <tr>
