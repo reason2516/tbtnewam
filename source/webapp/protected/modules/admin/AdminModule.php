@@ -77,8 +77,13 @@ class AdminModule extends CWebModule {
                 'name' => '抽奖管理',
                 'url' => $this->createModuleUrl('lottery/index'),
                 'subItems' => array(
+                    'add' => array(
+                        'name' => '创建抽奖活动',
+                        'url' => $this->createModuleUrl('lottery/add'),
+                        'subItems' => array(),
+                    ),
                     'index' => array(
-                        'name' => '抽奖管理',
+                        'name' => '抽奖活动列表',
                         'url' => $this->createModuleUrl('lottery/index'),
                         'subItems' => array(),
                     ),

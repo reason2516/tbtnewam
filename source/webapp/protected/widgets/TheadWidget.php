@@ -1,8 +1,6 @@
 <?php
 
 class TheadWidget extends CWidget {
-
-    public $model;
     public $items;
     public $lastColumn = '操作'; // 可自定义最后一列标题,为空则不显示
 
@@ -13,7 +11,7 @@ class TheadWidget extends CWidget {
     public function run() {
         foreach ($this->items as $item) {
             echo Chtml::openTag('th');
-            echo $this->model->getAttributeLabel($item);
+            echo $item;
             echo Chtml::closeTag('th');
         }
         if (!empty($this->lastColumn)) {

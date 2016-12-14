@@ -23,7 +23,7 @@ class LotteryController extends AdminBaseController {
         return array(
             array(
                 'allow',
-                'actions' => array('index',),
+                'actions' => array('index', 'add'),
                 'users' => array('@'),
             ),
             array(
@@ -32,9 +32,20 @@ class LotteryController extends AdminBaseController {
             )
         );
     }
-
+    
+    /**
+     * 抽奖活动列表
+     */
     public function actionIndex() {
         $this->render('index');
     }
-
+    
+    /**
+     * 创建一个新的抽奖活动
+     */
+    public function actionAdd() {
+        $this->render('add');
+    }
+    
+    
 }

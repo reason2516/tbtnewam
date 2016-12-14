@@ -3,13 +3,12 @@
     <tr>
         <?php
         $this->widget('application.widgets.TheadWidget', array(
-            'model' => $model,
             'items' => array(
-                'id',
-                'job_number',
-                'realname',
-                'phonenumber',
-                'status',
+                $model->getAttributeLabel('id'),
+                $model->getAttributeLabel('job_number'),
+                $model->getAttributeLabel('realname'),
+                $model->getAttributeLabel('phonenumber'),
+                $model->getAttributeLabel('status'),
             ),
         ));
         ?>
