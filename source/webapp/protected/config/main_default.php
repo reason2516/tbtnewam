@@ -10,6 +10,8 @@ return array(
     'language' => 'zh_cn',
     // preloading 'log' component
     'preload' => array('log'),
+    // config the default contorller
+    'defaultController' => 'default',
     // autoloading model and component classes
     'import' => array(
         'application.models.*',
@@ -41,9 +43,9 @@ return array(
             'urlFormat' => 'path',
             'showScriptName' => false, // 隐藏域名中的index.php
             'rules' => array(
-                '<controller:\w+>/<id:\d+>' => '<controller>/view',
-                '<controller:\w+>/<action:\w+>/<id:\d+>' => '<controller>/<action>',
-                '<controller:\w+>/<action:\w+>' => '<controller>/<action>',
+//                '<controller:\w+>/<id:\d+>' => '<controller>/view',
+//                '<controller:\w+>/<action:\w+>/<id:\d+>' => '<controller>/<action>',
+//                '<controller:\w+>/<action:\w+>' => '<controller>/<action>',
             ),
         ),
         // This is the database connection configuration.
@@ -59,7 +61,7 @@ return array(
         ),
         'errorHandler' => array(
             // use 'site/error' action to display errors
-            'errorAction' => 'site/error',
+            'errorAction' => 'default/error',
         ),
         'log' => array(
             'class' => 'CLogRouter',

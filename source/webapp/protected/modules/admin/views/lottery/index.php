@@ -1,4 +1,4 @@
-<?php $this->pageTitle = '成员首页' ?>
+<?php $this->pageTitle = '抽奖首页' ?>
 <?php if (!empty($list)) { ?>
     <table class="table">
         <tr>

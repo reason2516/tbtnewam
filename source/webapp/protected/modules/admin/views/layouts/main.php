@@ -17,6 +17,7 @@
                 <?php $this->widget('application.widgets.NavWidget',array('items' => $this->getModule()->navItems()))?>
             </div>
             <div class="exit">
+                <a href="<?php echo Yii::app()->request->getHostInfo()?>">网站首页</a>
                 <a href="<?php echo Yii::app()->createUrl('/admin/default/logout') ?>">退出</a>
             </div>
         </div>
