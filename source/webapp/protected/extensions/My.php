@@ -13,9 +13,9 @@ class My {
      * 检查字符串为空跳转
      * @param type $params
      */
-    public static function emptyParamsCheck($params, $isJson = FALSE) {
+    public static function emptyParamsCheck($params, $jsonResult = FALSE) {
         if (empty($params)) {
-            if ($isJson) {
+            if ($jsonResult) {
                 My::outPut('', ApiStatusCode::$error, '缺少必要参数');
             } else {
                 Yii::app()->request->redirect(Yii::app()->request->urlReferrer);

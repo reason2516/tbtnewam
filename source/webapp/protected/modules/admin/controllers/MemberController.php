@@ -39,7 +39,7 @@ class MemberController extends AdminBaseController {
     public function actionIndex() {
         $model = new Member();
         $model->status = array(Member::STATUS_NORMAL, Member::STATUS_PAUSAL);
-        $model->pageSize = 10;
+        $model->pageSize = 30;
         $dataProvider = $model->search();
         $list = $dataProvider->getData();
         $pager = $dataProvider->pagination;

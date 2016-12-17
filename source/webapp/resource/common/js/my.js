@@ -16,7 +16,7 @@ $.fn.myDialog = function (params) {
                 class: '',
                 click: function () {
                     $(this).dialog('close');
-                    if (default_params.callBack != null || default_params.callBack.functionName != '') {
+                    if (default_params.callBack != null && default_params.callBack.functionName != '') {
                         eval(default_params.callBack.functionName)(default_params.callBack); // 生成回调方法,传入回调参数
                     }
                 }

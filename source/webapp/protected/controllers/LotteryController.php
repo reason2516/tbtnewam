@@ -31,23 +31,20 @@ class LotteryController extends BaseController {
     /**
      * 抽奖
      */
-    public function actionLotterHandler() {
+    public function actionLotteryHandler() {
         $id = Yii::app()->request->getParam('id', ''); // 本次抽奖活动id
         $itemId = $lotteryId = Yii::app()->request->getParam('itemId', ''); // 当前奖项id
         $memberModel = Member::model();
         $lotteryModel = Lottery::model()->findByPk($id);
-        $members = $lotteryModel->getLcukyMembers($memberModel, $lotteryModel->LotteryItem); // 获取抽奖候选人名单
-
+        $members = $lotteryModel->getLcukyMembers($memberModel, $lotteryModel->LotteryItem); // 抽奖候选人名单
         $lotteryItemModel = LotteryItem::model();
-
         foreach ($lotteryModel->LotteryItem as $item) {
             if ($item->id == $itemId) {
-                $lotteryItemModel = $item;
+                $lotteryItemModel = $item; // 在lotteryModel中获取当前奖项 active对象,减少查库次数
                 break;
             }
         }
-
-        if ($lucyMembers = $lotteryItemModel->lotteryHandler($members)) {
+        if ($lucyMembers = $lotteryItemModel->lotteryHandler($members)) { // 抽奖并将结果保存到 $lucyMembers
             My::outPut(array('members' => $lucyMembers, 'itemId' => $itemId), ApiStatusCode::$ok);
         } else {
             My::outPut('', ApiStatusCode::$error, $lotteryItemModel->getError('lotteryHandlerError'));

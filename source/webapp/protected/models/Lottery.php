@@ -173,9 +173,7 @@ class Lottery extends CActiveRecord {
      */
     public function getLcukyMembers(Member $memberModel = NULL, $lotteryItem = array()) {
         $memberModel = !is_null($memberModel) ? $memberModel : Member::model();
-        $memberModel->status = Member::STATUS_NORMAL;
-        $members = CHtml::listData($memberModel->search()->getData(), 'id', 'attributes'); // 所有具有正常状态的member array('id' => realname)
-
+        $members = CHtml::listData($memberModel->findAll('status = :status', array(':status' => Member::STATUS_NORMAL)), 'id', 'attributes'); // 所有具有正常状态的member array('id' => realname)
         $lotteryItem = !empty($lotteryItem) ? $lotteryItem : $this->LotteryItem;
         if (!empty($lotteryItem)) {
             foreach ($lotteryItem as $lotteryItem) {

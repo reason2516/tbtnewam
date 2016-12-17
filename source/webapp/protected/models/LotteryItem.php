@@ -112,7 +112,6 @@ class LotteryItem extends CActiveRecord {
             $this->addError('lotteryHandlerError', '当前奖项已全部抽取完毕，请勿重复抽取');
             return FALSE;
         }
-
         $randomMembers = array();
         if (count($members) > ($this->total - count($this->Member))) { // 参与人数 > 奖项设置人数 - 已获奖人数
             $randomId = array_rand($members, $this->total - count($this->Member)); // 随机抽取
