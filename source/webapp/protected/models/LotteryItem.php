@@ -13,6 +13,7 @@
 class LotteryItem extends CActiveRecord {
 
     public $pageSize = 10;
+    public $lotteryHandlerError;
 
     /**
      * @return string the associated database table name
@@ -45,7 +46,8 @@ class LotteryItem extends CActiveRecord {
         // NOTE: you may need to adjust the relation name and the related
         // class name for the relations automatically generated below.
         return array(
-//            'Lottery' => array(self::BELONGS_TO, 'Lottery', '', 'on' => 't.lottery_id = lottery.id'),
+            'Lottery' => array(self::BELONGS_TO, 'Lottery', '', 'on' => 't.lottery_id = lottery.id'),
+            'Member' => array(self::MANY_MANY, 'Member', 'am_lottery_result(lottery_item_id, member_id)'),
         );
     }
 
@@ -58,7 +60,7 @@ class LotteryItem extends CActiveRecord {
             'name' => '奖项名称',
             'lottery_id' => '归属抽奖活动id',
             'total' => '数量',
-            'sort' => '排序',
+            'sort' => '抽奖顺序',
         );
     }
 
@@ -98,6 +100,42 @@ class LotteryItem extends CActiveRecord {
      */
     public static function model($className = __CLASS__) {
         return parent::model($className);
+    }
+
+    /**
+     * 抽奖控制器
+     * $this->Member 当前项目已经获奖的人
+     * $member 所有抽奖的候选人
+     */
+    public function lotteryHandler($members) {
+        if (count($this->Member) >= $this->total || empty($members)) {
+            $this->addError('lotteryHandlerError', '当前奖项已全部抽取完毕，请勿重复抽取');
+            return FALSE;
+        }
+
+        $randomMembers = array();
+        if (count($members) > ($this->total - count($this->Member))) { // 参与人数 > 奖项设置人数 - 已获奖人数
+            $randomId = array_rand($members, $this->total - count($this->Member)); // 随机抽取
+            if (is_array($randomId)) {
+                foreach ($randomId as $id) {
+                    $randomMembers[$id] = $members[$id];
+                }
+            } else {
+                $randomMembers[$randomId] = $members[$randomId];
+            }
+        } else {
+            $randomMembers = $members;
+        }
+        
+        $lotterResult = new LotteryResult();
+        foreach($randomMembers as $member){
+            $lotterResult->isNewRecord = TRUE;
+            $lotterResult->lottery_item_id = $this->id;
+            $lotterResult->member_id = $member['id'];
+            $lotterResult->save();
+        }
+        
+        return $randomMembers;
     }
 
 }

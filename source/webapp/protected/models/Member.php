@@ -17,8 +17,10 @@ class Member extends CActiveRecord {
     const STATUS_PAUSAL = 2;
     const STATUS_DELETE = 11;
     const STATUS_DELETE_COMPLETE = 12;
-    
+
     public $pageSize = 10;
+    public $select = '*';
+
     /**
      * @return string the associated database table name
      */
@@ -67,7 +69,7 @@ class Member extends CActiveRecord {
             'status' => '账户状态', // ： 1正常 2暂停 11删除 12彻底删除
         );
     }
-    
+
     /**
      * 全部状态描述
      * @return type
@@ -79,13 +81,13 @@ class Member extends CActiveRecord {
             self::STATUS_DELETE => '删除',
         );
     }
-    
+
     /**
      * 状态描述
      * @param type $status
      * @return type
      */
-    public function getStatusName($status){
+    public function getStatusName($status) {
         $statusList = $this->statusList();
         return isset($statusList[$status]) ? $statusList[$status] : $status;
     }
@@ -104,8 +106,9 @@ class Member extends CActiveRecord {
      */
     public function search() {
         // @todo Please modify the following code to remove attributes that should not be searched.
-        
+
         $criteria = new CDbCriteria;
+        $criteria->select = $this->select;
         $criteria->compare('id', $this->id);
         $criteria->compare('realname', $this->realname);
         $criteria->compare('job_number', $this->job_number);

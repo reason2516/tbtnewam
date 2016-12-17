@@ -6,9 +6,10 @@
         <link rel="stylesheet" href="/resource/common/plugs/jqueryUI/jquery-ui.min.css"/>
         <script type="text/javascript" src="/resource/common/plugs/jqueryUI/jquery-ui.min.js"></script>
         <script type="text/javascript" src="/resource/common/js/my.js"></script>
-        <?php Yii::app()->clientScript->registerCoreScript('jquery');?>
+        <?php Yii::app()->clientScript->registerCoreScript('jquery'); ?>
     </head>
     <body>
-            <?php echo $content ?>
+        <?php Yii::app()->user; ?>
+        <?php echo $content ?>
     </body>
 </html>

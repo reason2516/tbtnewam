@@ -18,7 +18,7 @@ return array(
         'application.components.*',
         'application.extensions.*',
         'application.widgets.*',
-        'application.definds.*',
+        'application.defind.*',
     ),
     'modules' => array(
         'admin',

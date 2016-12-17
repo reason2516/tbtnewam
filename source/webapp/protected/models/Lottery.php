@@ -17,6 +17,7 @@ class Lottery extends CActiveRecord {
     const STATUS_OVERDUE = '21';
 
     public $pageSize = 10;
+    public $select = '*';
 
     /**
      * @return string the associated database table name
@@ -48,6 +49,7 @@ class Lottery extends CActiveRecord {
         // NOTE: you may need to adjust the relation name and the related
         // class name for the relations automatically generated below.
         return array(
+            'LotteryItem' => array(self::HAS_MANY, 'LotteryItem', 'lottery_id', 'order' => 'LotteryItem.sort'),
         );
     }
 
@@ -81,12 +83,12 @@ class Lottery extends CActiveRecord {
         // @todo Please modify the following code to remove attributes that should not be searched.
 
         $criteria = new CDbCriteria;
-
-        $criteria->compare('id', $this->id, true);
-        $criteria->compare('name', $this->name, true);
-        $criteria->compare('time_start', $this->time_start, true);
-        $criteria->compare('time_end', $this->time_end, true);
-        $criteria->compare('ctime', $this->ctime, true);
+        $criteria->select = $this->select;
+        $criteria->compare('id', $this->id);
+//        $criteria->compare('name', $this->name, true);
+//        $criteria->compare('time_start', $this->time_start, true);
+//        $criteria->compare('time_end', $this->time_end, true);
+//        $criteria->compare('ctime', $this->ctime, true);
 
         return new CActiveDataProvider($this, array(
             'criteria' => $criteria,
@@ -161,6 +163,30 @@ class Lottery extends CActiveRecord {
         if (strtotime($timeEnd) < time()) {
             return self::STATUS_OVERDUE;
         }
+    }
+
+    /**
+     * 获取当前抽奖活动候选人名单
+     * @param Member $memberModel
+     * @param array $lotteryItem 
+     * @return array array('id' => realname)
+     */
+    public function getLcukyMembers(Member $memberModel = NULL, $lotteryItem = array()) {
+        $memberModel = !is_null($memberModel) ? $memberModel : Member::model();
+        $memberModel->status = Member::STATUS_NORMAL;
+        $members = CHtml::listData($memberModel->search()->getData(), 'id', 'attributes'); // 所有具有正常状态的member array('id' => realname)
+
+        $lotteryItem = !empty($lotteryItem) ? $lotteryItem : $this->LotteryItem;
+        if (!empty($lotteryItem)) {
+            foreach ($lotteryItem as $lotteryItem) {
+                foreach ($lotteryItem->Member as $member) {
+                    array_key_exists($member->id, $members); // 去除当前活动下已获奖的候选人
+                    unset($members[$member->id]);
+                }
+            }
+        }
+
+        return $members;
     }
 
 }
