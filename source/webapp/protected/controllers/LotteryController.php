@@ -22,9 +22,11 @@ class LotteryController extends BaseController {
      */
     public function actionView() {
         $id = Yii::app()->request->getParam('id', '');
+        $itemId = $lotteryId = Yii::app()->request->getParam('itemId', ''); // 当前奖项id
         $memberModel = Member::model();
         $lotteryModel = Lottery::model()->findByPk($id);
-        $members = $lotteryModel->getLcukyMembers($memberModel, $lotteryModel->LotteryItem); // 获取抽奖候选人名单
+        My::emptyParamsCheck($lotteryModel);
+        $members = $lotteryModel->getLcukyMembers($memberModel); // 获取抽奖候选人名单
         $this->render('view', array('lotteryModel' => $lotteryModel, 'memberModel' => $memberModel, 'members' => $members));
     }
 
@@ -33,10 +35,13 @@ class LotteryController extends BaseController {
      */
     public function actionLotteryHandler() {
         $id = Yii::app()->request->getParam('id', ''); // 本次抽奖活动id
-        $itemId = $lotteryId = Yii::app()->request->getParam('itemId', ''); // 当前奖项id
+        $itemId = $lotteryId = Yii::app()->request->getParam('itemId'); // 当前奖项id
         $memberModel = Member::model();
-        $lotteryModel = Lottery::model()->findByPk($id);
-        $members = $lotteryModel->getLcukyMembers($memberModel, $lotteryModel->LotteryItem); // 抽奖候选人名单
+        $lotteryModel = Lottery::model()->findByPk($id, 't.time_start < :nowTime AND time_end > :nowTime', array(':nowTime' => date('Y-m-d H:i:s')));
+        if (empty($lotteryModel)) {
+            My::outPut('', ApiStatusCode::$error, '活动已过期');
+        }
+        $members = $lotteryModel->getLcukyMembers($memberModel); // 抽奖候选人名单
         $lotteryItemModel = LotteryItem::model();
         foreach ($lotteryModel->LotteryItem as $item) {
             if ($item->id == $itemId) {

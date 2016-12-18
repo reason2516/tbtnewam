@@ -113,11 +113,9 @@ $this->pageTitle = $lotteryModel->name;
                 $(this).val('停止');
                 $(this).attr('btnStatus', 'stop');
                 inputRandom = setInterval(randomMember, 30);
-                btnLottery.not('#'+ $(this).attr('id')).attr('disabled', 'disabled');
             } else {
                 $(this).val('开始');
                 $(this).attr('btnStatus', 'start');
-                btnLottery.not('#'+ $(this).attr('id')).removeAttr('disabled', 'disabled');
                 $.ajax({
                     url: '/lottery/lotteryHandler',
                     type: 'GET',
@@ -139,7 +137,7 @@ $this->pageTitle = $lotteryModel->name;
                                 var tmp = "<tr><td>" + ret.data.members[key].realname + "</td> <td>" + ret.data.members[key].job_number + "</td> <td>" + ret.data.members[key].phonenumber + "</td> </tr>"
                                 $('#lotteryTable' + ret.data.itemId).append(tmp);
                                 removeMembers(ret.data.members[key].id);
-                                names += ret.data.members[key].realname + ' , ';
+                                names += ret.data.members[key].realname + ' ';
                             }
                             inputLottery.val(names);
                         }

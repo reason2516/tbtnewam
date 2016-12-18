@@ -168,16 +168,16 @@ class Lottery extends CActiveRecord {
     /**
      * 获取当前抽奖活动候选人名单
      * @param Member $memberModel
-     * @param array $lotteryItem 
+     * @param array $lotteryItems array()
      * @return array array('id' => realname)
      */
-    public function getLcukyMembers(Member $memberModel = NULL, $lotteryItem = array()) {
+    public function getLcukyMembers(Member $memberModel = NULL) {
         $memberModel = !is_null($memberModel) ? $memberModel : Member::model();
         $members = CHtml::listData($memberModel->findAll('status = :status', array(':status' => Member::STATUS_NORMAL)), 'id', 'attributes'); // 所有具有正常状态的member array('id' => realname)
-        $lotteryItem = !empty($lotteryItem) ? $lotteryItem : $this->LotteryItem;
-        if (!empty($lotteryItem)) {
-            foreach ($lotteryItem as $lotteryItem) {
-                foreach ($lotteryItem->Member as $member) {
+        $lotteryItems = $this->LotteryItem;
+        if (!empty($lotteryItems)) {
+            foreach ($lotteryItems as $lotteryItems) {
+                foreach ($lotteryItems->Member as $member) {
                     array_key_exists($member->id, $members); // 去除当前活动下已获奖的候选人
                     unset($members[$member->id]);
                 }

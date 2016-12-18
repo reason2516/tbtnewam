@@ -18,10 +18,9 @@ class My {
             if ($jsonResult) {
                 My::outPut('', ApiStatusCode::$error, '缺少必要参数');
             } else {
-                Yii::app()->request->redirect(Yii::app()->request->urlReferrer);
+                throw new CHttpException(404, Yii::t('yii', 'The system is unable to find the requested action "{action}".', array('{action}' => Yii::app()->request->getUrl())));
             }
         }
     }
-
 
 }
