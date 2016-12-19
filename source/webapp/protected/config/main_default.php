@@ -19,7 +19,6 @@ return array(
         'application.extensions.*',
         'application.widgets.*',
         'application.defind.*',
-        'application.extensions.yii-mail.*',
     ),
     'modules' => array(
         'admin',
@@ -77,21 +76,6 @@ return array(
               'class'=>'CWebLogRoute',
               ),
              */
-            ),
-        ),
-        // costomer compontents
-        'mail' => array(
-            'class' => 'ext.yii-mail.YiiMail',
-            'transportType' => 'smtp',
-            'viewPath' => 'application.views.mail',
-            'logging' => true,
-            'dryRun' => false,
-            'transportOptions' => array(
-                'host' => 'mail.tongbaotu.com',
-//                'host' => '192.168.4.22',
-                'username' => 'wangmingxu@tongbaotu.com',
-                'password' => 'Kid321456',
-                'port' => '443',
             ),
         ),
     ),
