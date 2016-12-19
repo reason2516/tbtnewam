@@ -39,7 +39,7 @@ CREATE TABLE `am_admin` (
 
 LOCK TABLES `am_admin` WRITE;
 /*!40000 ALTER TABLE `am_admin` DISABLE KEYS */;
-INSERT INTO `am_admin` VALUES (1,'admin','af60e5ff3ef25430177599c5f039e35ecd6f82a3','1q2q','王明旭','2016-12-14 18:36:56');
+INSERT INTO `am_admin` VALUES (1,'admin','af60e5ff3ef25430177599c5f039e35ecd6f82a3','1q2q','王明旭','2016-12-18 15:09:13');
 /*!40000 ALTER TABLE `am_admin` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -57,7 +57,7 @@ CREATE TABLE `am_lottery` (
   `time_end` datetime NOT NULL COMMENT '结束时间',
   `ctime` datetime NOT NULL COMMENT '创建时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='抽奖活动';
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='抽奖活动';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -66,7 +66,7 @@ CREATE TABLE `am_lottery` (
 
 LOCK TABLES `am_lottery` WRITE;
 /*!40000 ALTER TABLE `am_lottery` DISABLE KEYS */;
-INSERT INTO `am_lottery` VALUES (1,'测试抽奖活动01','2016-12-14 18:38:19','2016-12-22 18:00:00','2016-12-14 15:58:19');
+INSERT INTO `am_lottery` VALUES (1,'测试抽奖活动01','2016-12-14 18:38:19','2016-12-22 18:00:00','2016-12-14 15:58:19'),(2,'测试2','2016-12-06 00:00:00','2016-12-20 00:00:00','2016-12-17 00:48:12');
 /*!40000 ALTER TABLE `am_lottery` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -135,7 +135,7 @@ CREATE TABLE `am_member` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `job_number_UNIQUE` (`job_number`),
   UNIQUE KEY `phonenumber_UNIQUE` (`phonenumber`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -144,7 +144,7 @@ CREATE TABLE `am_member` (
 
 LOCK TABLES `am_member` WRITE;
 /*!40000 ALTER TABLE `am_member` DISABLE KEYS */;
-INSERT INTO `am_member` VALUES (1,'王明旭','0001','18810498066',1),(2,'李鑫','0002','18809010901',1),(3,'李兴国','0003','18812312312',1),(4,'郭晓丽','0005','18813123131',1);
+INSERT INTO `am_member` VALUES (1,'王明旭','0001','18810498066',1),(2,'李鑫','0002','18809010901',1),(3,'王春艳','0003','18812312312',1),(4,'郭晓丽','0004','18813123131',1),(5,'罗永伟','0005','18812312313',1),(6,'窦倩','0006','18822312313',1),(7,'白慧敏','0007','15901069703',1),(8,'张海涛','0008','15621312313',1),(9,'张晓勇','0009','18801231231',1),(10,'流川枫','0010','18712312311',1),(11,'樱木花道','0011','15912321312',1),(12,'蜡笔小新','0012','18812312311',1),(13,'小丸子','0013','18812312315',1);
 /*!40000 ALTER TABLE `am_member` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -157,4 +157,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-12-18 20:00:01
+-- Dump completed on 2016-12-19 20:00:04
